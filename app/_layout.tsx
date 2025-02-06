@@ -32,7 +32,7 @@ export default function RootLayout() {
         } />
         <Tabs.Screen name="products"
           options={{
-            title: "All products",
+            headerShown: false,
             tabBarLabel: "Products",
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="color-wand" color={color} size={size} />

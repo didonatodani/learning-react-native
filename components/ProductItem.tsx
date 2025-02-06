@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Product } from '@/types/interfaces'
 import { COLORS } from '@/constants/colors'
+import { Link } from 'expo-router'
 
 interface ProductItemProps {
     product: Product
@@ -10,13 +11,17 @@ interface ProductItemProps {
 
 export default function ProductItem({ product }: ProductItemProps) {
     return (
-        <View style={styles.productItemContainer}>
-            <View style={styles.textContainer}>
-                <Text style={styles.productTitle}>{product.name}</Text>
-                <Text style={styles.productBrand}>{product.brand.toUpperCase()}</Text>
-            </View>
-            <Ionicons name='chevron-forward' size={20} color={COLORS.text} />
-        </View>
+        <Link href={`/products/${product.id}`} asChild>
+            <TouchableOpacity>
+                <View style={styles.productItemContainer}>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.productTitle}>{product.name}</Text>
+                        <Text style={styles.productBrand}>{product.brand.toUpperCase()}</Text>
+                    </View>
+                    <Ionicons name='chevron-forward' size={20} color={COLORS.text} />
+                </View>
+            </TouchableOpacity>
+        </Link>
     )
 }
 
