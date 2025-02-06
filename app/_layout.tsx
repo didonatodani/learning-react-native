@@ -1,39 +1,63 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "@/constants/colors";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Tabs screenOptions={{
+        headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: COLORS.background,
+        },
+        headerTintColor: COLORS.text,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        tabBarStyle: {
+          backgroundColor: COLORS.background,
+          borderColor: COLORS.text,
+          borderTopWidth: 1,
+        },
+        tabBarActiveTintColor: COLORS.text,
+        tabBarInactiveTintColor: COLORS.inactive,
+
+      }}>
+        <Tabs.Screen name="index" options={
+          {
+            href: null,
+          }
+
+        } />
+        <Tabs.Screen name="products"
+          options={{
+            title: "All products",
+            tabBarLabel: "Products",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="color-wand" color={color} size={size} />
+            )
+          }}
+        />
+        <Tabs.Screen name="brands"
+          options={{
+            title: "All Brands",
+            tabBarLabel: "Brands",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="pricetag" color={color} size={size} />
+            )
+          }}
+        />
+        <Tabs.Screen name="favs"
+          options={{
+            title: "Favorite Products",
+            tabBarLabel: "Favs",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="heart" color={color} size={size} />
+            )
+          }}
+        />
+      </Tabs>
+    </GestureHandlerRootView>
+  )
 }
