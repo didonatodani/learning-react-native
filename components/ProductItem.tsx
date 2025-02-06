@@ -15,8 +15,8 @@ export default function ProductItem({ product }: ProductItemProps) {
             <TouchableOpacity>
                 <View style={styles.productItemContainer}>
                     <View style={styles.textContainer}>
-                        <Text style={styles.productTitle}>{product.name}</Text>
-                        <Text style={styles.productBrand}>{product.brand.toUpperCase()}</Text>
+                        <Text style={styles.productTitle}>{product.title.slice(0, 28)}</Text>
+                        <Text style={styles.productBrand}>{product.category.toUpperCase()}</Text>
                     </View>
                     <Ionicons name='chevron-forward' size={20} color={COLORS.text} />
                 </View>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     productItemContainer: {
         backgroundColor: COLORS.containerBackground,
         padding: 10,
-        height: 90,
+        height: 100,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

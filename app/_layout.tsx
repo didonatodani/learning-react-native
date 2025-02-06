@@ -35,16 +35,16 @@ export default function RootLayout() {
             headerShown: false,
             tabBarLabel: "Products",
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="color-wand" color={color} size={size} />
+              <Ionicons name="gift" color={color} size={size} />
             )
           }}
         />
-        <Tabs.Screen name="brands"
+        <Tabs.Screen name="category"
           options={{
-            title: "All Brands",
-            tabBarLabel: "Brands",
+            title: "All Categories",
+            tabBarLabel: "Categories",
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="pricetag" color={color} size={size} />
+              <Ionicons name="folder" color={color} size={size} />
             )
           }}
         />

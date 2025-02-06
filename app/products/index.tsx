@@ -12,14 +12,15 @@ export default function Products() {
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   async function fetchProducts() {
     setLoading(true);
     try {
-      const response = await fetch('http://makeup-api.herokuapp.com/api/v1/products.json?limit=20');
+      const response = await fetch('https://fakestoreapi.com/products');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data: Product[] = await response.json();
-      // only fetch 20 products that have images
-      setProducts(data.slice(50, 80));
+      setProducts(data);
     } catch (error) {
       console.log(error);
     } finally {

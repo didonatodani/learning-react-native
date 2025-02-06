@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function brands() {
+export default function category() {
   return (
     <View>
-      <Text>brands</Text>
+      <Text>category</Text>
     </View>
   )
 }
+
 
 const styles = StyleSheet.create({})
