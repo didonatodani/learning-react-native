@@ -1,5 +1,5 @@
 import { Product } from '@/types/interfaces'
-import { useLocalSearchParams, Stack } from 'expo-router' 
+import { useLocalSearchParams, Stack } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { COLORS } from '@/constants/colors'
@@ -49,11 +49,10 @@ export default function ProductDetails() {
 
   async function toggleFavorite() {
     try {
-      const favorites = await AsyncStorage.getItem(FAVORITES_KEY) 
+      const favorites = await AsyncStorage.getItem(FAVORITES_KEY)
       let favoriteProducts = favorites ? JSON.parse(favorites) as Product[] : []
 
-
-      if(isFavorite){
+      if (isFavorite) {
         favoriteProducts = favoriteProducts.filter(product => product.id.toString() !== id)
       } else {
         favoriteProducts.push(product as Product)
@@ -66,7 +65,7 @@ export default function ProductDetails() {
       console.error('Error toggling favorite:', error)
     }
 
-  } 
+  }
 
   return (
     <View style={styles.container}>
@@ -76,10 +75,9 @@ export default function ProductDetails() {
             <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={24} color={COLORS.text} />
           </TouchableOpacity>
         )
-      }}/>
+      }} />
       <Image source={{ uri: product?.image }} style={styles.image} />
       <View style={styles.productDetailsContainer}>
-
         <Text style={styles.productTitle}>{product?.title}</Text>
         <Text style={styles.productPrice}>{product?.price} €</Text>
         <Text style={styles.productCategory}>{product?.category.toUpperCase()}</Text>
